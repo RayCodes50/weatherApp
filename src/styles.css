@@ -77,7 +77,7 @@ svg {
   isolation: isolate;
 }
 :root {
-  --search_back: rgb(238, 238, 238);
+  --search_back: rgb(215, 214, 214);
 }
 html {
   font-family: "Prompt", sans-serif;
@@ -202,11 +202,30 @@ body {
   display: flex;
   gap: 0.5rem;
   align-items: center;
-  margin: auto;
+  margin-left: 2rem;
 }
 .weather__list-svg {
-  height: 30px;
-  width: 30px;
+  height: 50px;
+  width: 50px;
+  margin-right: 0.5rem;
+}
+.background {
+  background-color: rgba(62, 124, 194, 0.5);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.background__main {
+  background-color: rgba(62, 124, 194, 0.5);
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+}
+.background__hourly {
+  background-color: rgba(62, 124, 194, 0.5);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
 }
 .weather__list-label {
   opacity: 0.5;

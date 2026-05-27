@@ -1,23 +1,44 @@
 import "./styles.css";
 import { getWeather } from "./weatherApi.js";
 import { setWeatherData, getWeatherData } from "./weatherState.js";
-//import svg this way
-// import clearDay from "@meteocons/svg/fill/clear-day.svg";
+import { createHourly, createForecast } from "./weatherDom.js";
+import { renderDetails } from "./weatherDetailsRender.js";
+import { renderMainSvg, renderHourlySvg } from "./renderSvg.js";
+let units = "UK";
+const weatherApi = await getWeather("manchester", units);
 
-// const weatherSum = document.getElementById("weatherSum");
-// the way to implement svg
-let units = "US";
-const result = await getWeather("MaNchESTER", units);
-console.log(result);
-setWeatherData(result);
-console.log(getWeatherData().currentConditions);
+//renders main svg
+const mainSvg = document.querySelector(".weather__header-svg");
+renderMainSvg(mainSvg, "clear-day");
 
-// // console.log(result.currentConditions);
+// renders weather details svg
+const weatherList = document.querySelectorAll(".weather__list-item");
+renderDetails(weatherList);
 
-// const img = document.createElement("img");
-// img.src = clearDay;
-// img.width = 180;
-// img.height = 180;
-// img.alt = "Clear day";
-// weatherSum.appendChild(img);
-// end
+function renderHourly() {
+  const hourlyList = document.querySelector(".weather__hourly-list");
+  hourlyList.innerHTML = "";
+
+  const hourlyCards = createHourly();
+  hourlyCards.forEach((card) => {
+    hourlyList.appendChild(card);
+  });
+
+  renderHourlySvg(hourlyCards, weatherApi, units);
+}
+
+function renderForecast() {
+  const forecastList = document.querySelector(".weather__forecast-list");
+  forecastList.innerHTML = "";
+
+  const forecastCards = createForecast();
+  forecastCards.forEach((card) => {
+    forecastList.appendChild(card);
+  });
+}
+renderHourly();
+renderForecast();
+
+console.log(weatherApi.days[0]);
+setWeatherData(weatherApi);
+// console.log(getWeatherData().currentConditions.datetime);
