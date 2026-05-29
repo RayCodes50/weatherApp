@@ -18,7 +18,19 @@ const svgObj = {
   gusts,
 };
 
-function renderDetails(detailsArr) {
+function renderDetails(detailsArr, weather) {
+  const current = weather.currentConditions;
+  console.log(weather.currentConditions);
+  const weatherVars = {
+    rain: current.precipprob,
+    wind: current.windspeed,
+    sunUp: current.sunrise.slice(0, 5),
+    sunDown: current.sunset.slice(0, 5),
+    uvIndex: current.uvindex,
+    pressure: current.pressure,
+    humidity: current.humidity,
+    gusts: current.windgust,
+  };
   let cards = [];
   detailsArr.forEach((el) => {
     const elVal = el.dataset.weather;
@@ -29,6 +41,8 @@ function renderDetails(detailsArr) {
       img.height = 50;
       img.alt = elVal;
       cards.push(el.querySelector(".weather__list-svg").appendChild(img));
+      el.querySelector(".weather__val").innerHTML = `${weatherVars[elVal]}`;
+      console.log(weatherVars[elVal]);
     }
   });
 }

@@ -22,12 +22,13 @@ const weatherIcons = {
 
 function renderMainSvg(target, weather) {
   //toggles background behind wind
-  if (weather == "wind") {
+  const weatherConditions = weather.currentConditions.icon;
+  if (weatherConditions == "wind") {
     target.classList.add("background__main");
   } else {
     target.classList.remove("background__main");
   }
-  const elVal = weather;
+  const elVal = weatherConditions;
   if (elVal in weatherIcons) {
     const img = document.createElement("img");
     img.src = weatherIcons[elVal];
@@ -46,7 +47,7 @@ function renderHourlySvg(target, weather, units) {
   const weatherDayHours = weather.days[0].hours;
   target.forEach((el, i) => {
     // renders SVG
-    const weatherType = weatherDayHours[hourOnlyNum + i].icon;
+    const weatherType = weatherDayHours[hourOnlyNum + 1 + i].icon;
     console.log(weatherType);
     if (weatherType in weatherIcons) {
       if (weatherType === "wind") {
@@ -64,7 +65,7 @@ function renderHourlySvg(target, weather, units) {
       targetSvg.appendChild(img);
       // renders time
       const targetTime = el.querySelector(".weather__hourly-time");
-      const displayHour = (hourOnlyNum + i) % 24;
+      const displayHour = (hourOnlyNum + 1 + i) % 24;
       const hour12 = displayHour % 12 || 12;
 
       switch (units) {

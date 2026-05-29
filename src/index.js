@@ -5,15 +5,15 @@ import { createHourly, createForecast } from "./weatherDom.js";
 import { renderDetails } from "./weatherDetailsRender.js";
 import { renderMainSvg, renderHourlySvg } from "./renderSvg.js";
 let units = "UK";
-const weatherApi = await getWeather("manchester", units);
+const weatherApi = await getWeather("san-francisco", units);
 
 //renders main svg
 const mainSvg = document.querySelector(".weather__header-svg");
-renderMainSvg(mainSvg, "clear-day");
+renderMainSvg(mainSvg, weatherApi);
 
-// renders weather details svg
+// renders current weather details svg
 const weatherList = document.querySelectorAll(".weather__list-item");
-renderDetails(weatherList);
+renderDetails(weatherList, weatherApi);
 
 function renderHourly() {
   const hourlyList = document.querySelector(".weather__hourly-list");
@@ -40,5 +40,6 @@ renderHourly();
 renderForecast();
 
 console.log(weatherApi.days[0]);
+console.log(weatherApi.currentConditions);
 setWeatherData(weatherApi);
 // console.log(getWeatherData().currentConditions.datetime);
