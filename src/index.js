@@ -2,10 +2,10 @@ import "./styles.css";
 import { getWeather } from "./weatherApi.js";
 import { setWeatherData, getWeatherData } from "./weatherState.js";
 import { createHourly, createForecast } from "./weatherDom.js";
-import { renderDetails } from "./weatherDetailsRender.js";
+import { renderDetails, currentTemperature } from "./weatherDetailsRender.js";
 import { renderMainSvg, renderHourlySvg } from "./renderSvg.js";
 let units = "UK";
-const weatherApi = await getWeather("san-francisco", units);
+const weatherApi = await getWeather("manchester", units);
 
 //renders main svg
 const mainSvg = document.querySelector(".weather__header-svg");
@@ -36,10 +36,16 @@ function renderForecast() {
     forecastList.appendChild(card);
   });
 }
+// render current temperature min and max
+const tempEl = document.getElementById("weatherSum");
+currentTemperature(tempEl, weatherApi);
+
+// render DOM
 renderHourly();
 renderForecast();
 
-console.log(weatherApi.days[0]);
+console.log(weatherApi);
+console.log(weatherApi.days);
 console.log(weatherApi.currentConditions);
 setWeatherData(weatherApi);
 // console.log(getWeatherData().currentConditions.datetime);

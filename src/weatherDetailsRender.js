@@ -20,7 +20,6 @@ const svgObj = {
 
 function renderDetails(detailsArr, weather) {
   const current = weather.currentConditions;
-  console.log(weather.currentConditions);
   const weatherVars = {
     rain: current.precipprob,
     wind: current.windspeed,
@@ -42,9 +41,32 @@ function renderDetails(detailsArr, weather) {
       img.alt = elVal;
       cards.push(el.querySelector(".weather__list-svg").appendChild(img));
       el.querySelector(".weather__val").innerHTML = `${weatherVars[elVal]}`;
-      console.log(weatherVars[elVal]);
     }
   });
 }
+//renders current temperatures and conditions
+function currentTemperature(el, weather) {
+  const tempCurrEl = document.querySelector(".weather__temp");
+  const tempMaxEl = document.querySelector(".weather__temp-max");
+  const tempMinEl = document.querySelector(".weather__temp-min");
+  const conditionsEl = document.querySelector(".weather__condition");
+  const tempFeelEl = document.querySelector(".weather__feels");
+  const day = weather.currentConditions;
+  const tempCurr = day.temp;
+  const tempMax = weather.days[0].tempmax;
+  console.log(weather.days[0]);
+  const tempMin = weather.days[0].tempmin;
+  const tempFeel = day.feelslike;
+  const conditions = day.conditions;
 
-export { renderDetails };
+  tempCurrEl.innerHTML = `${tempCurr}&deg;`;
+  tempMinEl.innerHTML = `${tempMin}&deg;`;
+  tempMaxEl.innerHTML = `${tempMax}&deg;`;
+  conditionsEl.innerHTML = `${conditions}`;
+  tempFeelEl.innerHTML = `Feels like: ${tempFeel}&deg;`;
+
+  console.log(el);
+  console.log(tempCurr, tempMax, tempMin, tempFeel, conditions);
+}
+
+export { renderDetails, currentTemperature };

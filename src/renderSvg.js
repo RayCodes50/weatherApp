@@ -40,15 +40,20 @@ function renderMainSvg(target, weather) {
   return target;
 }
 function renderHourlySvg(target, weather, units) {
-  console.log(weather);
   const hour = weather.currentConditions.datetime;
   const hourOnlyNum = Number(hour.slice(0, 2));
-  console.log(hourOnlyNum);
-  const weatherDayHours = weather.days[0].hours;
   target.forEach((el, i) => {
+    let hourIndex = hourOnlyNum + 1 + i;
+    let hourData = weather.days[0].hours[hourIndex];
+    // console.log(weatherDayHours[hourOnlyNum + i].icon);
+
+    if (hourData === undefined) {
+      hourIndex = hourIndex % 24;
+      hourData = weather.days[1].hours[hourIndex];
+    }
+    const weatherType = hourData.icon;
+
     // renders SVG
-    const weatherType = weatherDayHours[hourOnlyNum + 1 + i].icon;
-    console.log(weatherType);
     if (weatherType in weatherIcons) {
       if (weatherType === "wind") {
         el.classList.add("background__main");
@@ -79,6 +84,10 @@ function renderHourlySvg(target, weather, units) {
         default:
           targetTime.innerHTML = `${hourOnlyNum + i}:00`;
       }
+      // render temp
+      const temp = el.querySelector(".weather__hourly-temp");
+      temp.innerHTML = `${hourData.temp}<span class="hourly__temp-unit"> C</span>`;
+      console.log();
     }
   });
 }
