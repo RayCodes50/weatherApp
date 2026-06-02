@@ -1,3 +1,24 @@
+import snow from "@meteocons/svg/fill/snow.svg";
+import rain from "@meteocons/svg/fill/rain.svg";
+import fog from "@meteocons/svg/fill/fog.svg";
+import wind from "@meteocons/svg/fill/wind.svg";
+import cloudy from "@meteocons/svg/fill/cloudy.svg";
+import partlyCloudyDay from "@meteocons/svg/fill/partly-cloudy-day.svg";
+import partlyCloudyNight from "@meteocons/svg/fill/partly-cloudy-night.svg";
+import clearDay from "@meteocons/svg/fill/clear-day.svg";
+import clearNight from "@meteocons/svg/fill/clear-night.svg";
+
+const weatherIcons = {
+  snow,
+  rain,
+  fog,
+  wind,
+  cloudy,
+  "partly-cloudy-day": partlyCloudyDay,
+  "partly-cloudy-night": partlyCloudyNight,
+  "clear-day": clearDay,
+  "clear-night": clearNight,
+};
 const hourlyData = [
   {
     time: "3 AM",
@@ -63,16 +84,39 @@ const weeklyData = [
     icon: "rain",
   },
 ];
-// const weatherDetails = {
-//   rainChance: 87,
-//   wind: 4,
-//   sunrise: "07:00 AM",
-//   sunset: "08:02 PM",
-//   uvIndex: 10.8,
-//   pressure: 1007,
-//   humidity: 64,
-//   gusts: 7.8,
-// };
+function forecastWeeklyData(weather, el) {
+  const svgContainers = el.querySelectorAll(".weather__forecast-svg");
+  for (let i = 0; i < 3; i++) {
+    console.log(weather.days[i + 1]);
+    const day = new Date(weather.days[i + 1].datetime).toLocaleDateString(
+      "en-GB",
+      {
+        weekday: "short",
+      }
+    );
+    const date = new Date(
+      `${weather.days[i + 1].datetime}T12:00:00`
+    ).toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short",
+    });
+
+    weeklyData[i].day = day;
+    weeklyData[i].date = date;
+    weeklyData[i].minTemp = weather.days[i + 1].tempmin;
+    weeklyData[i].maxTemp = weather.days[i + 1].tempmax;
+    weeklyData[i].icon = weather.days[i + 1].icon;
+    const elVal = weeklyData[i].icon;
+    if (elVal in weatherIcons) {
+      const img = document.createElement("img");
+      img.src = weatherIcons[elVal];
+      img.width = 50;
+      img.height = 50;
+      img.alt = elVal;
+      svgContainers[i].appendChild(img);
+    }
+  }
+}
 function createHourly() {
   return hourlyData.map((hour) => {
     const li = document.createElement("li");
@@ -127,43 +171,7 @@ function createForecast() {
     const li = document.createElement("li");
     li.classList.add("weather__forecast-item");
     li.innerHTML = `<div class="weather__forecast-svg" aria-hidden="true">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 128 128"
-                >
-                  <g id="clear-day__clear-day">
-                    <g id="clear-day__Sun">
-                      <circle
-                        id="clear-day__Core"
-                        cx="64"
-                        cy="64"
-                        r="19.5"
-                        fill="url(#clear-day__paint0_linear_1802_5186)"
-                        stroke="#f8af18"
-                      />
-                      <g id="clear-day__Rays">
-                        <path
-                          fill="#f8af18"
-                          d="M61 19a3 3 0 1 1 6 0v14a3 3 0 0 1-6 0zM93.699 30.059A3 3 0 1 1 97.94 34.3l-9.9 9.9a3 3 0 1 1-4.242-4.243zM109 61a3 3 0 1 1 0 6H95a3 3 0 1 1 0-6zM97.941 93.699a3 3 0 1 1-4.243 4.242l-9.899-9.9a3 3 0 1 1 4.243-4.242zM61 95a3 3 0 1 1 6 0v14a3 3 0 1 1-6 0zM39.958 83.799a3 3 0 1 1 4.243 4.243l-9.9 9.9a3 3 0 1 1-4.242-4.243zM33 61a3 3 0 1 1 0 6H19a3 3 0 0 1 0-6zM44.201 39.958a3 3 0 1 1-4.243 4.243l-9.9-9.9a3 3 0 1 1 4.243-4.242z"
-                        />
-                      </g>
-                    </g>
-                  </g>
-                  <defs>
-                    <linearGradient
-                      id="clear-day__paint0_linear_1802_5186"
-                      x1="64"
-                      x2="64"
-                      y1="44"
-                      y2="84"
-                      gradientUnits="userSpaceOnUse"
-                    >
-                      <stop stop-color="#fbbf24" />
-                      <stop offset="1" stop-color="#f8af18" />
-                    </linearGradient>
-                  </defs>
-                </svg>
+                
               </div>
               <div class="weather__forecast-details">
                 <p class="weather__forecast-day">${day.day}</p>
@@ -183,4 +191,4 @@ function createForecast() {
   });
 }
 
-export { createHourly, createForecast };
+export { createHourly, createForecast, forecastWeeklyData };

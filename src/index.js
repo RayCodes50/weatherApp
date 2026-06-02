@@ -1,11 +1,15 @@
 import "./styles.css";
 import { getWeather } from "./weatherApi.js";
 import { setWeatherData, getWeatherData } from "./weatherState.js";
-import { createHourly, createForecast } from "./weatherDom.js";
+import {
+  createHourly,
+  createForecast,
+  forecastWeeklyData,
+} from "./weatherDom.js";
 import { renderDetails, currentTemperature } from "./weatherDetailsRender.js";
 import { renderMainSvg, renderHourlySvg } from "./renderSvg.js";
 let units = "UK";
-const weatherApi = await getWeather("manchester", units);
+const weatherApi = await getWeather("london", units);
 
 //renders main svg
 const mainSvg = document.querySelector(".weather__header-svg");
@@ -31,7 +35,7 @@ function renderForecast() {
   const forecastList = document.querySelector(".weather__forecast-list");
   forecastList.innerHTML = "";
 
-  const forecastCards = createForecast();
+  const forecastCards = createForecast(weatherApi);
   forecastCards.forEach((card) => {
     forecastList.appendChild(card);
   });
@@ -40,12 +44,15 @@ function renderForecast() {
 const tempEl = document.getElementById("weatherSum");
 currentTemperature(tempEl, weatherApi);
 
+// changes arr that forcast is created from, i took different aproach here
+// and do not want to rebuild the entire thing
+// instead i will update arr with fetched data
+
 // render DOM
 renderHourly();
 renderForecast();
+const forecastList = document.querySelector(".weather__forecast-list");
+forecastWeeklyData(weatherApi, forecastList);
 
-console.log(weatherApi);
-console.log(weatherApi.days);
-console.log(weatherApi.currentConditions);
 setWeatherData(weatherApi);
 // console.log(getWeatherData().currentConditions.datetime);
