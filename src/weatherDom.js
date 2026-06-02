@@ -84,8 +84,7 @@ const weeklyData = [
     icon: "rain",
   },
 ];
-function forecastWeeklyData(weather, el) {
-  const svgContainers = el.querySelectorAll(".weather__forecast-svg");
+function forecastWeeklyData(weather) {
   for (let i = 0; i < 3; i++) {
     console.log(weather.days[i + 1]);
     const day = new Date(weather.days[i + 1].datetime).toLocaleDateString(
@@ -106,15 +105,8 @@ function forecastWeeklyData(weather, el) {
     weeklyData[i].minTemp = weather.days[i + 1].tempmin;
     weeklyData[i].maxTemp = weather.days[i + 1].tempmax;
     weeklyData[i].icon = weather.days[i + 1].icon;
-    const elVal = weeklyData[i].icon;
-    if (elVal in weatherIcons) {
-      const img = document.createElement("img");
-      img.src = weatherIcons[elVal];
-      img.width = 50;
-      img.height = 50;
-      img.alt = elVal;
-      svgContainers[i].appendChild(img);
-    }
+
+    console.log(weeklyData[i].day, weeklyData[i].date);
   }
 }
 function createHourly() {
@@ -190,5 +182,19 @@ function createForecast() {
     return li;
   });
 }
+function renderForecastSvg(el) {
+  const svgContainers = el.querySelectorAll(".weather__forecast-svg");
 
-export { createHourly, createForecast, forecastWeeklyData };
+  for (let i = 0; i < 3; i++) {
+    const elVal = weeklyData[i].icon;
+    if (elVal in weatherIcons) {
+      const img = document.createElement("img");
+      img.src = weatherIcons[elVal];
+      img.width = 50;
+      img.height = 50;
+      img.alt = elVal;
+      svgContainers[i].appendChild(img);
+    }
+  }
+}
+export { createHourly, createForecast, forecastWeeklyData, renderForecastSvg };
