@@ -14,7 +14,7 @@
   <body>
     <main class="main">
       <header class="search">
-        <div class="search_wrap">
+        <label for="location" class="search_wrap">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="36"
@@ -29,7 +29,12 @@
             <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
             <path d="M21 21l-6 -6" />
           </svg>
-          <input type="text" class="search_inp" placeholder="Choose location" />
+          <input
+            id="location"
+            type="text"
+            class="search_inp"
+            placeholder="Choose location"
+          />
           <svg
             class="visibility"
             xmlns="http://www.w3.org/2000/svg"
@@ -42,23 +47,25 @@
               d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-6.489 5.8a1 1 0 0 0 -1.218 1.567l1.292 1.293l-1.292 1.293l-.083 .094a1 1 0 0 0 1.497 1.32l1.293 -1.292l1.293 1.292l.094 .083a1 1 0 0 0 1.32 -1.497l-1.292 -1.293l1.292 -1.293l.083 -.094a1 1 0 0 0 -1.497 -1.32l-1.293 1.292l-1.293 -1.292l-.094 -.083z"
             />
           </svg>
-        </div>
-        <div class="search_settings">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="36"
-            height="36"
-            viewBox="0 0 24 24"
-            fill="black"
-          >
-            <path
-              d="M14.647 4.081a.724 .724 0 0 0 1.08 .448c2.439 -1.485 5.23 1.305 3.745 3.744a.724 .724 0 0 0 .447 1.08c2.775 .673 2.775 4.62 0 5.294a.724 .724 0 0 0 -.448 1.08c1.485 2.439 -1.305 5.23 -3.744 3.745a.724 .724 0 0 0 -1.08 .447c-.673 2.775 -4.62 2.775 -5.294 0a.724 .724 0 0 0 -1.08 -.448c-2.439 1.485 -5.23 -1.305 -3.745 -3.744a.724 .724 0 0 0 -.447 -1.08c-2.775 -.673 -2.775 -4.62 0 -5.294a.724 .724 0 0 0 .448 -1.08c-1.485 -2.439 1.305 -5.23 3.744 -3.745a.722 .722 0 0 0 1.08 -.447c.673 -2.775 4.62 -2.775 5.294 0zm-2.647 4.919a3 3 0 1 0 0 6a3 3 0 0 0 0 -6z"
-            />
-          </svg>
+        </label>
+
+        <div class="search_settings" role="radiogroup" aria-label="Unit system">
+          <label class="unit__option">
+            <div>EU</div>
+            <input type="radio" name="unit" value="EU" id="unitMetric" />
+          </label>
+          <label class="unit__option">
+            <span>UK</span>
+            <input type="radio" name="unit" value="UK" id="unitUk" checked />
+          </label>
+          <label class="unit__option">
+            <span>USA</span>
+            <input type="radio" name="unit" value="USA" id="unitUsa" />
+          </label>
         </div>
       </header>
       <section class="section" id="app">
-        <header class="weather__header">
+ <header class="weather__header">
           <div class="weather__header-svg"></div>
           <div class="weather_header-right" id="weatherSum">
             <div class="weather__current">
@@ -116,245 +123,6 @@
             </div>
           </div>
         </header>
-        <div class="weather__details">
-          <ul class="weather__list">
-            <li class="weather__list-item" data-weather="rain">
-              <div class="weather__list-svg" aria-hidden="true"></div>
-              <div class="weather__stat-text">
-                <p class="weather__list-label">Chance of rain</p>
-                <p class="weather__list-value">
-                  <span class="weather__val">87</span>%
-                </p>
-              </div>
-            </li>
-            <li class="weather__list-item" data-weather="wind">
-              <div
-                class="weather__list-svg background"
-                aria-hidden="true"
-              ></div>
-              <div class="weather__stat-text">
-                <p class="weather__list-label">Wind</p>
-                <p class="weather__list-value">
-                  <span class="weather__val">4</span>
-                  <span class="unit__val">km/h</span>
-                </p>
-              </div>
-            </li>
-            <li class="weather__list-item" data-weather="sunUp">
-              <div class="weather__list-svg" aria-hidden="true"></div>
-              <div class="weather__stat-text">
-                <p class="weather__list-label">Sunrise</p>
-                <p class="weather__list-value">
-                  <span class="weather__val">07:05</span> AM
-                </p>
-              </div>
-            </li>
-
-            <li class="weather__list-item" data-weather="sunDown">
-              <div class="weather__list-svg" aria-hidden="true"></div>
-              <div class="weather__stat-text">
-                <p class="weather__list-label">Sunset</p>
-                <p class="weather__list-value">
-                  <span class="weather__val">08:03</span> PM
-                </p>
-              </div>
-            </li>
-            <li class="weather__list-item" data-weather="uvIndex">
-              <div class="weather__list-svg" aria-hidden="true"></div>
-              <div class="weather__stat-text">
-                <p class="weather__list-label">UV Index</p>
-                <p class="weather__list-value">
-                  <span class="weather__val">10.8</span>
-                </p>
-              </div>
-            </li>
-
-            <li class="weather__list-item" data-weather="pressure">
-              <div class="weather__list-svg" aria-hidden="true"></div>
-              <div class="weather__stat-text">
-                <p class="weather__list-label">Pressure</p>
-                <p class="weather__list-value">
-                  <span class="weather__val">1007</span> mB
-                </p>
-              </div>
-            </li>
-            <li class="weather__list-item" data-weather="humidity">
-              <div class="weather__list-svg" aria-hidden="true"></div>
-              <div class="weather__stat-text">
-                <p class="weather__list-label">Humidity</p>
-                <p class="weather__list-value">
-                  <span class="weather__val">64</span>%
-                </p>
-              </div>
-            </li>
-
-            <li class="weather__list-item" data-weather="gusts">
-              <div
-                class="weather__list-svg background"
-                aria-hidden="true"
-              ></div>
-              <div class="weather__stat-text">
-                <p class="weather__list-label">Gusts</p>
-                <p class="weather__list-value">
-                  <span class="weather__val">7.8</span>
-                  <span class="unit__val">km/h</span>
-                </p>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <section class="weather__hourly">
-          <h2 class="weather__hourly-h2">Hourly</h2>
-          <ul class="weather__hourly-list">
-            <li class="weather__hourly-item">
-              <p class="weather__hourly-time">3 AM</p>
-              <p class="weather__hourly-temp">12&deg;</p>
-
-              <div class="weather__hourly-svg" aria-hidden="true">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 128 128"
-                >
-                  <g id="clear-day__clear-day">
-                    <g id="clear-day__Sun">
-                      <circle
-                        id="clear-day__Core"
-                        cx="64"
-                        cy="64"
-                        r="19.5"
-                        fill="url(#clear-day__paint0_linear_1802_5186)"
-                        stroke="#f8af18"
-                      />
-                      <g id="clear-day__Rays">
-                        <path
-                          fill="#f8af18"
-                          d="M61 19a3 3 0 1 1 6 0v14a3 3 0 0 1-6 0zM93.699 30.059A3 3 0 1 1 97.94 34.3l-9.9 9.9a3 3 0 1 1-4.242-4.243zM109 61a3 3 0 1 1 0 6H95a3 3 0 1 1 0-6zM97.941 93.699a3 3 0 1 1-4.243 4.242l-9.899-9.9a3 3 0 1 1 4.243-4.242zM61 95a3 3 0 1 1 6 0v14a3 3 0 1 1-6 0zM39.958 83.799a3 3 0 1 1 4.243 4.243l-9.9 9.9a3 3 0 1 1-4.242-4.243zM33 61a3 3 0 1 1 0 6H19a3 3 0 0 1 0-6zM44.201 39.958a3 3 0 1 1-4.243 4.243l-9.9-9.9a3 3 0 1 1 4.243-4.242z"
-                        />
-                      </g>
-                    </g>
-                  </g>
-                  <defs>
-                    <linearGradient
-                      id="clear-day__paint0_linear_1802_5186"
-                      x1="64"
-                      x2="64"
-                      y1="44"
-                      y2="84"
-                      gradientUnits="userSpaceOnUse"
-                    >
-                      <stop stop-color="#fbbf24" />
-                      <stop offset="1" stop-color="#f8af18" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-            </li>
-            <li class="weather__hourly-item">
-              <p class="weather__hourly-time">3 AM</p>
-              <p class="weather__hourly-temp">12&deg;</p>
-
-              <div class="weather__hourly-svg" aria-hidden="true">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 128 128"
-                >
-                  <g id="clear-day__clear-day">
-                    <g id="clear-day__Sun">
-                      <circle
-                        id="clear-day__Core"
-                        cx="64"
-                        cy="64"
-                        r="19.5"
-                        fill="url(#clear-day__paint0_linear_1802_5186)"
-                        stroke="#f8af18"
-                      />
-                      <g id="clear-day__Rays">
-                        <path
-                          fill="#f8af18"
-                          d="M61 19a3 3 0 1 1 6 0v14a3 3 0 0 1-6 0zM93.699 30.059A3 3 0 1 1 97.94 34.3l-9.9 9.9a3 3 0 1 1-4.242-4.243zM109 61a3 3 0 1 1 0 6H95a3 3 0 1 1 0-6zM97.941 93.699a3 3 0 1 1-4.243 4.242l-9.899-9.9a3 3 0 1 1 4.243-4.242zM61 95a3 3 0 1 1 6 0v14a3 3 0 1 1-6 0zM39.958 83.799a3 3 0 1 1 4.243 4.243l-9.9 9.9a3 3 0 1 1-4.242-4.243zM33 61a3 3 0 1 1 0 6H19a3 3 0 0 1 0-6zM44.201 39.958a3 3 0 1 1-4.243 4.243l-9.9-9.9a3 3 0 1 1 4.243-4.242z"
-                        />
-                      </g>
-                    </g>
-                  </g>
-                  <defs>
-                    <linearGradient
-                      id="clear-day__paint0_linear_1802_5186"
-                      x1="64"
-                      x2="64"
-                      y1="44"
-                      y2="84"
-                      gradientUnits="userSpaceOnUse"
-                    >
-                      <stop stop-color="#fbbf24" />
-                      <stop offset="1" stop-color="#f8af18" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-            </li>
-          </ul>
-        </section>
-        <section class="weather__forecast">
-          <h2 class="weather__forecast-h2">This week</h2>
-          <ul class="weather__forecast-list">
-            <li class="weather__forecast-item">
-              <div class="weather__forecast-svg" aria-hidden="true">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 128 128"
-                >
-                  <g id="clear-day__clear-day">
-                    <g id="clear-day__Sun">
-                      <circle
-                        id="clear-day__Core"
-                        cx="64"
-                        cy="64"
-                        r="19.5"
-                        fill="url(#clear-day__paint0_linear_1802_5186)"
-                        stroke="#f8af18"
-                      />
-                      <g id="clear-day__Rays">
-                        <path
-                          fill="#f8af18"
-                          d="M61 19a3 3 0 1 1 6 0v14a3 3 0 0 1-6 0zM93.699 30.059A3 3 0 1 1 97.94 34.3l-9.9 9.9a3 3 0 1 1-4.242-4.243zM109 61a3 3 0 1 1 0 6H95a3 3 0 1 1 0-6zM97.941 93.699a3 3 0 1 1-4.243 4.242l-9.899-9.9a3 3 0 1 1 4.243-4.242zM61 95a3 3 0 1 1 6 0v14a3 3 0 1 1-6 0zM39.958 83.799a3 3 0 1 1 4.243 4.243l-9.9 9.9a3 3 0 1 1-4.242-4.243zM33 61a3 3 0 1 1 0 6H19a3 3 0 0 1 0-6zM44.201 39.958a3 3 0 1 1-4.243 4.243l-9.9-9.9a3 3 0 1 1 4.243-4.242z"
-                        />
-                      </g>
-                    </g>
-                  </g>
-                  <defs>
-                    <linearGradient
-                      id="clear-day__paint0_linear_1802_5186"
-                      x1="64"
-                      x2="64"
-                      y1="44"
-                      y2="84"
-                      gradientUnits="userSpaceOnUse"
-                    >
-                      <stop stop-color="#fbbf24" />
-                      <stop offset="1" stop-color="#f8af18" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-              <div class="weather__forecast-details">
-                <p class="weather__forecast-day">THU</p>
-                <p class="weather__forecast-date">07 May</p>
-                <div class="weather__forecast-temps">
-                  <div class="weather__forecast-temp">
-                    <span class="weather__forecast-value">23.5&deg;</span>
-                    <span class="weather__forecast-label">min</span>
-                  </div>
-                  <div class="weather__forecast-temp">
-                    <span class="weather__forecast-value">30&deg;</span>
-                    <span class="weather__forecast-label">max</span>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
         </section>
       </section>
     </main>

@@ -86,7 +86,6 @@ const weeklyData = [
 ];
 function forecastWeeklyData(weather) {
   for (let i = 0; i < 3; i++) {
-    console.log(weather.days[i + 1]);
     const day = new Date(weather.days[i + 1].datetime).toLocaleDateString(
       "en-GB",
       {
@@ -105,8 +104,6 @@ function forecastWeeklyData(weather) {
     weeklyData[i].minTemp = weather.days[i + 1].tempmin;
     weeklyData[i].maxTemp = weather.days[i + 1].tempmax;
     weeklyData[i].icon = weather.days[i + 1].icon;
-
-    console.log(weeklyData[i].day, weeklyData[i].date);
   }
 }
 function createHourly() {
@@ -158,7 +155,20 @@ function createHourly() {
     return li;
   });
 }
-function createForecast() {
+function createForecast(units) {
+  let currentUnit = "";
+  switch (units) {
+    case "EU":
+    case "UK":
+      currentUnit = "&deg;C";
+      break;
+
+    case "USA":
+      currentUnit = "&deg;F";
+      break;
+    default:
+      currentUnit = "&deg;C";
+  }
   return weeklyData.map((day) => {
     const li = document.createElement("li");
     li.classList.add("weather__forecast-item");
@@ -170,11 +180,11 @@ function createForecast() {
                 <p class="weather__forecast-date">${day.date}</p>
                 <div class="weather__forecast-temps">
                   <div class="weather__forecast-temp">
-                    <span class="weather__forecast-value">${day.minTemp}&deg;</span>
+                    <span class="weather__forecast-value">${day.minTemp}${currentUnit}</span>
                     <span class="weather__forecast-label">min</span>
                   </div>
                   <div class="weather__forecast-temp">
-                    <span class="weather__forecast-value">${day.maxTemp}&deg;</span>
+                    <span class="weather__forecast-value">${day.maxTemp}${currentUnit}</span>
                     <span class="weather__forecast-label">max</span>
                   </div>
                 </div>
@@ -190,8 +200,8 @@ function renderForecastSvg(el) {
     if (elVal in weatherIcons) {
       const img = document.createElement("img");
       img.src = weatherIcons[elVal];
-      img.width = 50;
-      img.height = 50;
+      img.width = 70;
+      img.height = 70;
       img.alt = elVal;
       svgContainers[i].appendChild(img);
     }

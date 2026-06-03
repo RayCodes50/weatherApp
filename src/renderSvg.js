@@ -86,8 +86,18 @@ function renderHourlySvg(target, weather, units) {
       }
       // render temp
       const temp = el.querySelector(".weather__hourly-temp");
-      temp.innerHTML = `${hourData.temp}<span class="hourly__temp-unit"> C</span>`;
-      console.log();
+      switch (units) {
+        case "EU":
+        case "UK":
+          temp.innerHTML = `${hourData.temp}<span class="hourly__temp-unit"> &deg;C</span>`;
+          break;
+        case "USA":
+          temp.innerHTML = `${hourData.temp}<span class="hourly__temp-unit"> &deg;F</span>`;
+          break;
+        default:
+          temp.innerHTML = `${hourData.temp}<span class="hourly__temp-unit"> &deg;C</span>`;
+      }
+      console.log(hourData.temp);
     }
   });
 }

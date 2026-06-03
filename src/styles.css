@@ -111,18 +111,21 @@ body {
 }
 .search > .search_settings {
   margin-left: auto;
-  flex: 0 0 auto;
-  width: 68px;
+  padding: 0 1.5rem;
   height: 68px;
-  border-radius: 50%;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: var(--search_back);
   border: none;
-  cursor: pointer;
 }
-
+.unit__option {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 10px;
+}
 .search_settings svg {
   width: 35px;
   height: 35px;
@@ -239,6 +242,10 @@ body {
 .weather__forecast {
   margin: 1.5rem 1rem;
 }
+.weather__forecast {
+  display: flex;
+  flex-direction: column;
+}
 .weather__hourly-h2,
 .weather__forecast-h2 {
   font-size: 2rem;
@@ -275,6 +282,7 @@ body {
   gap: 12px;
   overflow-x: auto;
   padding: 0;
+  align-self: center;
 }
 .weather__forecast-item {
   background-color: var(--search_back);
@@ -282,8 +290,8 @@ body {
   height: 150px;
   display: flex;
   align-items: center;
-  gap: 1.25rem;
-  padding-left: 1rem;
+  gap: 0.5rem;
+  padding: 0 1rem;
 }
 .weather__forecast-svg {
   height: 80px;
@@ -300,7 +308,7 @@ body {
   gap: 2rem;
 }
 .weather__forecast-value {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: bold;
   display: block;
   margin-bottom: -0.25rem;

@@ -45,7 +45,20 @@ function renderDetails(detailsArr, weather) {
   });
 }
 //renders current temperatures and conditions
-function currentTemperature(el, weather) {
+function currentTemperature(el, weather, units) {
+  let currentUnit;
+  switch (units) {
+    case "EU":
+    case "UK":
+      currentUnit = "&deg;C";
+      break;
+
+    case "USA":
+      currentUnit = "&deg;F";
+      break;
+    default:
+      currentUnit = "&deg;C";
+  }
   const tempCurrEl = document.querySelector(".weather__temp");
   const tempMaxEl = document.querySelector(".weather__temp-max");
   const tempMinEl = document.querySelector(".weather__temp-min");
@@ -54,19 +67,15 @@ function currentTemperature(el, weather) {
   const day = weather.currentConditions;
   const tempCurr = day.temp;
   const tempMax = weather.days[0].tempmax;
-  console.log(weather.days[0]);
   const tempMin = weather.days[0].tempmin;
   const tempFeel = day.feelslike;
   const conditions = day.conditions;
 
-  tempCurrEl.innerHTML = `${tempCurr}&deg;`;
-  tempMinEl.innerHTML = `${tempMin}&deg;`;
-  tempMaxEl.innerHTML = `${tempMax}&deg;`;
+  tempCurrEl.innerHTML = `${tempCurr}${currentUnit}`;
+  tempMinEl.innerHTML = `${tempMin}${currentUnit}`;
+  tempMaxEl.innerHTML = `${tempMax}${currentUnit}`;
   conditionsEl.innerHTML = `${conditions}`;
-  tempFeelEl.innerHTML = `Feels like: ${tempFeel}&deg;`;
-
-  console.log(el);
-  console.log(tempCurr, tempMax, tempMin, tempFeel, conditions);
+  tempFeelEl.innerHTML = `Feels like: ${tempFeel}${currentUnit}`;
 }
 
 export { renderDetails, currentTemperature };
