@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..900;1,100..900&family=Prompt&display=swap"
+      rel="stylesheet"
+    />
+    <title>Weather App</title>
+  <script defer src="main.js"></script></head>
+  <body>
+    <main class="main">
+      <header class="search">
+        <label for="location" class="search_wrap">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="36"
+            height="36"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#607d8b"
+            stroke-width="0.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+            <path d="M21 21l-6 -6" />
+          </svg>
+          <input
+            id="location"
+            type="text"
+            class="search_inp"
+            placeholder="Choose location"
+          />
+          <svg
+            class="visibility"
+            xmlns="http://www.w3.org/2000/svg"
+            width="36"
+            height="36"
+            viewBox="0 0 24 24"
+            fill="black"
+          >
+            <path
+              d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-6.489 5.8a1 1 0 0 0 -1.218 1.567l1.292 1.293l-1.292 1.293l-.083 .094a1 1 0 0 0 1.497 1.32l1.293 -1.292l1.293 1.292l.094 .083a1 1 0 0 0 1.32 -1.497l-1.292 -1.293l1.292 -1.293l.083 -.094a1 1 0 0 0 -1.497 -1.32l-1.293 1.292l-1.293 -1.292l-.094 -.083z"
+            />
+          </svg>
+        </label>
+
+        <div class="search_settings" role="radiogroup" aria-label="Unit system">
+          <label class="unit__option">
+            <div>EU</div>
+            <input type="radio" name="unit" value="EU" id="unitMetric" />
+          </label>
+          <label class="unit__option">
+            <span>UK</span>
+            <input type="radio" name="unit" value="UK" id="unitUk" checked />
+          </label>
+          <label class="unit__option">
+            <span>USA</span>
+            <input type="radio" name="unit" value="USA" id="unitUsa" />
+          </label>
+        </div>
+      </header>
+      <section class="section" id="app">
+ <header class="weather__header">
+          <div class="weather__header-svg"></div>
+          <div class="weather_header-right" id="weatherSum">
+            <div class="weather__current">
+              <h1 class="weather__temp">24.6&deg;</h1>
+              <div class="weather__range-item flex">
+                <p class="weather_label">Min</p>
+                <div class="weather_range_value">
+                  <span class="weather_arrow">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-move-down-icon lucide-move-down"
+                    >
+                      <path d="M8 18L12 22L16 18" />
+                      <path d="M12 2V22" />
+                    </svg>
+                  </span>
+                  <p class="weather__temp-min">23.5&deg;</p>
+                </div>
+              </div>
+              <div class="weather__range-item">
+                <p class="weather_label">Max</p>
+                <div class="weather_range_value">
+                  <span class="weather_arrow">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-move-up-icon lucide-move-up"
+                    >
+                      <path d="M8 6L12 2L16 6" />
+                      <path d="M12 2V22" />
+                    </svg>
+                  </span>
+                  <p class="weather__temp-max">30&deg;</p>
+                </div>
+              </div>
+            </div>
+            <div class="weather__info">
+              <p class="weather__condition">Clear</p>
+              <p class="weather__feels">Feels like 26.4&deg;</p>
+            </div>
+          </div>
+        </header>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
